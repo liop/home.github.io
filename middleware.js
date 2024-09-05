@@ -1,6 +1,12 @@
+/*
+ * @Date: 2024-09-05 12:01:14
+ * @Description: 功能：
+ */
 import { next } from '@vercel/edge';
+import { getImgUrls } from './functions/bing';
 
-export default function middleware(req) {
+export default async function middleware(req) {
+  const imgs = await getImgUrls();
   return next({
     headers: {
       'Referrer-Policy': 'origin-when-cross-origin',
