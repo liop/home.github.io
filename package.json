@@ -2,6 +2,7 @@
   "name": "liop-home-page",
   "version": "1.0.5",
   "description": "Liop Home Page",
+  "type": "module",
   "scripts": {
   },
   "repository": {
