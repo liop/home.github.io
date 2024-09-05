@@ -27,11 +27,12 @@ var iUp = (function () {
 	};
 })();
 
+var defailt_bgs = ["https://www.bing.com/th?id=OHR.DuskyOwls_EN-GB7904137343_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","https://www.bing.com/th?id=OHR.AlpineLakes_EN-GB6796431877_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","https://www.bing.com/th?id=OHR.KatahdinWoods_EN-GB6027367272_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","https://www.bing.com/th?id=OHR.ThamesLondon_EN-GB5554427883_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","https://www.bing.com/th?id=OHR.DjanetAlgeria_EN-GB4963001163_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","https://www.bing.com/th?id=OHR.WhaleSharkDay_EN-GB4536568745_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","https://www.bing.com/th?id=OHR.CastellfollitSpain_EN-GB3934726824_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp","https://www.bing.com/th?id=OHR.ParalympicsParis_EN-GB7216458209_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"];
+var is_set_bg = false;
 function getBingImages(imgUrls) {
+  if (is_set_bg) return;
 	/**
 	 * 获取Bing壁纸
-	 * 先使用 GitHub Action 每天获取 Bing 壁纸 URL 并更新 images.json 文件
-	 * 然后读取 images.json 文件中的数据
 	 */
 	var indexName = "bing-image-index";
 	var index = sessionStorage.getItem(indexName);
@@ -39,12 +40,19 @@ function getBingImages(imgUrls) {
 	if (isNaN(index) || index == 7) index = 0;
 	else index++;
 	var imgUrl = imgUrls[index];
-	var url = "https://www.cn.bing.com" + imgUrl;
-	panel.style.background = "url('" + url + "') center center no-repeat #666";
+	panel.style.background = "url('" + imgUrl + "') center center no-repeat #666";
 	panel.style.backgroundSize = "cover";
 	sessionStorage.setItem(indexName, index);
 }
 
+(function () {
+   setTimeout(() => {
+    if (is_set_bg)  return;
+    getBingImages(defailt_bgs);
+    is_set_bg = true;
+  }, 2000);
+})();
+ 
 function decryptEmail(encoded) {
 	var address = atob(encoded);
 	window.location.href = "mailto:" + address;
