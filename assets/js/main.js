@@ -31,6 +31,7 @@ var defailt_bgs = ["https://www.bing.com/th?id=OHR.DuskyOwls_EN-GB7904137343_192
 var is_set_bg = false;
 function getBingImages(imgUrls) {
   if (is_set_bg) return;
+  is_set_bg = true;
 	/**
 	 * 获取Bing壁纸
 	 */
@@ -47,9 +48,7 @@ function getBingImages(imgUrls) {
 
 (function () {
    setTimeout(() => {
-    if (is_set_bg)  return;
     getBingImages(defailt_bgs);
-    is_set_bg = true;
   }, 2000);
 })();
  
