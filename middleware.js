@@ -3,7 +3,7 @@
  * @Description: 功能：
  */
 import { next } from '@vercel/edge';
-import { getImgUrls } from './functions/bing';
+import { getImgUrls } from './functions/bing.mjs';
 
 export default async function middleware(req) {
   const imgs = await getImgUrls();
